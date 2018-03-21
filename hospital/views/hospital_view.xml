@@ -1,0 +1,321 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="hospital_tree_view">
+            <field name="name">hospital.tree.view</field>
+            <field name="model">hospital.hospital</field>
+            <field name="arch" type="xml">
+                <tree string="Hospital">
+                    <field name="name"/>
+                    <field name="add"/>
+                    <field name="phone"/>
+                    <field name="patient_ids"/>
+                    <field name="start_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hospital_form_view">
+            <field name="name">hospital.form.view</field>
+            <field name="model">hospital.hospital</field>
+            <field name="arch" type="xml">
+                <form string="Hospital">
+                    <sheet>
+                        <group>
+                            <div class="oe_title">
+                                <h2>
+                                    <field name="name" placeholder="Hospital Name"/>
+                                </h2>
+                            </div>
+                        </group>
+                        <group>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <group>
+                                        <label string="ADDRESS" for="add"></label>
+                                        <field nolabel="1" name="add"/>
+                                        <field name="patient_ids"/>
+                                    </group>
+                                </div>
+                            </div>
+                        </group>
+                        <group>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <group>
+                                        <label string="PHONE" for="phone"></label>
+                                        <field nolabel="1" name="phone"/>
+                                        <label string="START DATE" for="start_date"></label>
+                                        <field nolabel="1" name="start_date"/>
+                                    </group>
+                                </div>
+                            </div>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="acton_hospital">
+            <field name="name">Hospital</field>
+            <field name="res_model">hospital.hospital</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Hospital" id="hospital_menu"/>
+        <menuitem name="Hospital" id="hospital_root_menu" sequence="1" action="acton_hospital" parent="hospital_menu"/>
+
+
+        <record model="ir.ui.view" id="patient_patient_kanban_view">
+            <field name="name">patient.patient.kanban.view</field>
+            <field name="model">patient.patient</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="color"/>
+                    <field name="name"/>
+                    <field name="department"/>
+                    <field name="gender"/>
+                    <field name="age"/>
+                    <field name="report"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click">
+                                <div class="col-xs-8">
+                                    <ul class="oe_kanban_colorpicker" data-field="color"/>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <div class="oe_group_department" t-if="record.department.raw_value">
+                                        <field name="department"/>
+                                    </div>
+                                    <div class="oe_group_name" t-if="record.name.raw_value">
+                                        <field name="name"/>
+                                    </div>
+                                    <div class="oe_group_gender" t-if="record.gender.raw_value">
+                                        <field name="gender"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+
+
+        <record model="ir.ui.view" id="patient_calendar_view">
+
+            <field name="name">patient.tree.calendar</field>
+            <field name="model">patient.patient</field>
+
+            <field name="arch" type="xml">
+                <calendar string="Patient Action" color="department" date_stop="discharge_date" date_start="admit_date">
+                    <field name="name"/>
+                    <field name="department"/>
+                    <field name="gender"/>
+                    <field name="age"/>
+                    <field name="report"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="patient_graph_view">
+
+            <field name="name">patient.tree.graph</field>
+            <field name="model">patient.patient</field>
+
+            <field name="arch" type="xml">
+                <graph string="Patient Graph" orientation="vertical">
+                    <field name="department"/>
+                    <field name="gender" type="measures" />
+                    <field name="name" type="measures" />
+                </graph>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="patient_form_view">
+            <field name="name">patient.form.tree</field>
+            <field name="model">patient.patient</field>
+
+            <field name="arch" type="xml">
+                <form string="Patient">
+                    <header>
+                        <button string="Male" name="change_male" class="oe_highlight" type="object"></button>
+                        <button string="Female" name="change_female" type="object"></button>
+                        <button string="Other" name="change_other" type="object"></button>
+                        <field name="gender" widget="statusbar" statusbar_visible="m,f,o"/>
+                    </header>
+
+                    <sheet>
+                        <!--<notebook>-->
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                                <field name="department"/>
+                                <field name="hospital_id"/>
+                                <field name="doctor_ids"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="age"/>
+                            </group>
+                            <group>
+                                <field name="report"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="admit_date"/>
+                            </group>
+                            <group>
+                                <field name="discharge_date"/>
+                            </group>
+                        </group>
+                        <!--</notebook>-->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="patient_patient_tree_view">
+            <field name="name">patient.form.tree</field>
+            <field name="model">patient.patient</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="hospital_id"/>
+                    <field name="doctor_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="acton_patient">
+            <field name="name">Patient</field>
+            <field name="res_model">patient.patient</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form,calendar,graph</field>
+        </record>
+
+
+        <menuitem name="Patient" id="patient_root_menu" sequence="2" action="acton_patient" parent="hospital_menu"/>
+
+
+
+        <record model="ir.ui.view" id="department_tree_view">
+            <field name="name">department.tree.view</field>
+            <field name="model">department.department</field>
+
+            <field name="arch" type="xml">
+                <tree string="Patient">
+                    <field name="name"/>
+                    <field name="designation"/>
+                    <field name="dname"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="department_form_view">
+            <field name="name">department.form.view</field>
+            <field name="model">department.department</field>
+
+            <field name="arch" type="xml">
+                <form string="Department">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="designation"/>
+                                <!--<field name="dname"/>-->
+                            </group>
+                        </group>
+                        <group>
+                            <notebook>
+                                <page string="Department Name">
+                                    <field name="name"/>
+                                </page>
+                                <page string="Doctor Name">
+                                    <field name="dname"/>
+                                </page>
+                            </notebook>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="acton_department">
+            <field name="name">Department</field>
+            <field name="res_model">department.department</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem name="Department" id="department_root_menu" sequence="2" action="acton_department"
+                  parent="hospital_menu"/>
+
+
+
+
+
+
+        <record model="ir.ui.view" id="doctor_doctor_tree_view">
+            <field name="name">doctor.doctor.tree.view</field>
+            <field name="model">doctor.doctor</field>
+
+            <field name="arch" type="xml">
+                <tree string="Doctor">
+                    <field name="name"/>
+                    <field name="department_id"/>
+                    <field name="patient_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="doctor_doctor_form_view">
+            <field name="name">doctor.doctor.form.view</field>
+            <field name="model">doctor.doctor</field>
+
+            <field name="arch" type="xml">
+                <form string="Doctor">
+                    <sheet>
+                        <div class="oe_title">
+                            <h2>
+                                <field name="name" placeholder="Doctor Name"/>
+                            </h2>
+                        </div>
+                       <group>
+                            <group>
+                                <field name="department_id"/>
+                            </group>
+                            <group>
+                                <field name="patient_ids"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="acton_doctor">
+            <field name="name">Doctor</field>
+            <field name="res_model">doctor.doctor</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem name="Doctor" id="doctor_root_menu" sequence="2" action="acton_doctor"
+                  parent="hospital_menu"/>
+
+    </data>
+</odoo>

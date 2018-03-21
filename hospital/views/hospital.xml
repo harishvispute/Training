@@ -1,0 +1,198 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="hospital_hospital_tree_view">
+            <field name="name">hospital.hospital.tree.view</field>
+            <field name="model">hospital.hospital</field>
+            <field name="arch" type="xml">
+                <tree string="Hospital">
+                    <field name="name"/>
+                    <field name="hadd"/>
+                    <field name="phone"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hospital_hospital_form_view">
+            <field name="name">hospital.hospital.form.view</field>
+            <field name="model">hospital.hospital</field>
+            <field name="arch" type="xml">
+                <form string="Hospital">
+                    <sheet>
+                        <group>
+                            <h2><field name="name" placeholder="Hospital Name"/></h2>
+                        </group>
+                        <group>
+                            <label string="ADDRESS" for="hadd"></label>
+                            <field nolabel="1" name="hadd"/>
+                        </group>
+                        <group>
+                            <label string="PHONE" for="phone"></label>
+                            <field nolabel="1" name="phone"/>
+                        </group>
+
+                        <group>
+                            <field nolabel="1" name="doctor_ids"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="acton_hospital">
+            <field name="name">Hospital</field>
+            <field name="res_model">hospital.hospital</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Hospital" id="hospital_menu"/>
+        <menuitem name="Hospital" id="hospital_root_menu" sequence="1" action="acton_hospital" parent="hospital_menu"/>
+
+
+        <record model="ir.ui.view" id="doctor_doctor_tree_view">
+            <field name="name">doctor.doctor.tree.view</field>
+            <field name="model">doctor.doctor</field>
+            <field name="arch" type="xml">
+                <tree string="Doctor">
+                    <field name="name"/>
+                    <field name="designation"/>
+                </tree>
+            </field>
+        </record>
+
+
+
+        <record model="ir.ui.view" id="doctor_doctor_form_view">
+            <field name="name">doctor.doctor.form.view</field>
+            <field name="model">doctor.doctor</field>
+            <field name="arch" type="xml">
+                <form string="Doctor">
+                    <sheet>
+                        <group>
+                            <h2><field name="name" placeholder="Doctor Name"/></h2>
+                        </group>
+                        <group>
+                            <label string="DESIGNATION" for="designation"></label>
+                            <field nolabel="1" name="designation"/>
+                        </group>
+                        <group>
+                            <field nolabel="1" name="hospital_ids"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="acton_doctor">
+            <field name="name">Doctor</field>
+            <field name="res_model">doctor.doctor</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Doctor" id="doctor_root_menu" sequence="1" action="acton_doctor" parent="hospital_menu"/>
+
+
+
+        <record model="ir.ui.view" id="department_department_tree_view">
+            <field name="name">department.department.tree.view</field>
+            <field name="model">department.department</field>
+            <field name="arch" type="xml">
+                <tree string="Department">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="department_department_form_view">
+            <field name="name">department.department.form.view</field>
+            <field name="model">department.department</field>
+            <field name="arch" type="xml">
+                <form string="Department">
+                    <sheet>
+                        <group>
+                            <h2><field name="name" placeholder="Department Name"/></h2>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="acton_department">
+            <field name="name">Department</field>
+            <field name="res_model">department.department</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Department" id="department_root_menu" sequence="1" action="acton_department" parent="hospital_menu"/>
+
+
+        <record model="ir.ui.view" id="patient_patient_tree_view">
+            <field name="name">patient.patient.tree.view</field>
+            <field name="model">patient.patient</field>
+            <field name="arch" type="xml">
+                <tree string="Patient">
+                    <field name="name"/>
+                    <field name="add"/>
+                    <field name="gender"/>
+                    <field name="age"/>
+                    <field name="diagnosis"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="patient_patient_form_view">
+            <field name="name">patient.patient.form.view</field>
+            <field name="model">patient.patient</field>
+            <field name="arch" type="xml">
+                <form string="Patient">
+                    <sheet>
+                        <group>
+                            <h2><field name="name" placeholder="Patient Name"/></h2>
+                        </group>
+
+                        <group>
+                            <label string="ADDRESS" for="add"></label>
+                            <field nolabel="1" name="add"/>
+                        </group>
+                        <group>
+                            <group>
+                                <label string="GENDER" for="gender"></label>
+                                <field nolabel="1" name="gender"/>
+                            </group>
+
+                            <group>
+                                <label string="AGE" for="age"></label>
+                                <field nolabel="1" name="age"/>
+                            </group>
+
+                            <group>
+                                <label string="DIAGNOSIS" for="diagnosis"></label>
+                                <field nolabel="1" name="diagnosis"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="acton_patient">
+            <field name="name">patient</field>
+            <field name="res_model">patient.patient</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Patient" id="patient_root_menu" sequence="1" action="acton_patient" parent="hospital_menu"/>
+
+
+
+
+
+
+
+
+    </data>
+</odoo>
