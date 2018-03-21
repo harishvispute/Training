@@ -7,7 +7,7 @@
     'author': 'Harish Vispute',
     'summary': 'All Purpose School Management',
     'description': """
-My school managament
+School management made easy!
 """,
     'depends': ['base','sale'],
     'data': [
