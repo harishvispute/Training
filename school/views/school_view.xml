@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="school_tree_view">
+            <field name="name">school.tree.view</field>
+            <field name="model">school.school</field>
+
+            <field name="arch" type="xml">
+                <tree string="School">
+                    <field name="name"/>
+                    <field name="add"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="school_form_view">
+            <field name="name">school.form.view</field>
+            <field name="model">school.school</field>
+
+            <field name="arch" type="xml">
+                <form string="School">
+                    <header>
+                        <button name="call_method" string="Call" type="object"></button>
+                        <button name="search_read" string="Search Read" type="object"></button>
+                    </header>
+
+
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                                <field name="add"/>
+                                <field name="total_stud"/>
+                            </group>
+                        </group>
+
+
+                        <notebook>
+                            <page string="Student Lists">
+                                <field name="student_ids"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="acton_school">
+            <field name="name">School</field>
+            <field name="res_model">school.school</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem name="School" id="school_menu" />
+        <menuitem name="School" id="school_root_menu" sequence="1" action="acton_school" parent="school_menu"/>
+
+
+
+        <record model="ir.ui.view" id="student_tree_view">
+            <field name="name">student.tree.view</field>
+            <field name="model">school.student</field>
+
+            <field name="arch" type="xml">
+                <tree string="Student">
+                    <field name="name"/>
+                    <field name="add"/>
+                    <field name="age"/>
+                    <field name="birth_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="student_form_view">
+            <field name="name">student.form.view</field>
+            <field name="model">school.student</field>
+
+            <field name="arch" type="xml">
+                <form string="Student">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="school_id"/>
+                            </group>
+                            <group>
+                                <field name="add"/>
+                                <field name="age"/>
+                            </group>
+                            <group>
+                                <field name="birth_date"/>
+                            </group>
+                            <group>
+                                <field name="email"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="acton_student">
+            <field name="name">Student</field>
+            <field name="res_model">school.student</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem name="Student" id="student_root_menu" sequence="1" action="acton_student" parent="school_menu"/>
+    </data>
+</odoo>

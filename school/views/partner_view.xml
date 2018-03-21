@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="res_partner_view">
+            <field name="name">res.partner.view</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <button name="change_active" string="ACTIVE" type="object" states="i"></button>
+                        <button name="change_inactive" string="INACTIVE" type="object" states="a"></button>
+                        <field name="state" widget="statusbar" statusbar_visible="a,i"/>
+                    </header>
+                </xpath>
+
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <field name="bdate"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="sale_order_form_inherit_my">
+            <field name="name">sale.order.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="b_date"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
